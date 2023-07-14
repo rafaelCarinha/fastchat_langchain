@@ -50,7 +50,6 @@ third_question_answer = ''
 
 @cl.langchain_factory(use_async=True)
 def main():
-    #llm = OpenAI(temperature=0)
     chain = LLMChain(llm=llm, prompt=PromptTemplate.from_template(prompt_template))
     return chain
 
