@@ -1,5 +1,5 @@
 langchain==0.0.233
 openai~=0.27.8
 fschat==0.1.2
-chromadb==0.3.29
-chainlit==0.5.2
+chromadb
+chainlit
