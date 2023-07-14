@@ -9,7 +9,7 @@ index = VectorstoreIndexCreator(embedding=embedding).from_loaders([loader])
 llm = ChatOpenAI(model="gpt-3.5-turbo")
 
 questions = [
-    "Who is your LLM model",
+    "What is your LLM model",
     "What is your AI Model"
 ]
 
