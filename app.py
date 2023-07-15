@@ -15,7 +15,7 @@ load_dotenv()
 prompt_template = """
  You are an AI insurance bot that will help users save money on your auto insurance.
  If the user provides an invalid or non logical answer for any of the following 3 questions:
- -Question 1: What's your zip code? - Valid Answers: Any valid ZIP United States Zip Code.
+ -Question 1: What's your zip code? - Valid Answers: 11030570, 61101.
  -Question 2: Do you work in tech? - Valid Answers: yes or no.
  -Question 3: Which company did you last work for? - Valid Answers: Any Technology Company.
  If the provided answers are not a valid, respond with the exact message: - "Your answer is not valid".
@@ -80,7 +80,7 @@ async def postprocess(output: str):
 
     if is_first_question_asked:
         if not validate_ai_response(ai_response):
-            await cl.Message(content=str(ai_response + first_question)).send()
+            await cl.Message(content=str(ai_response)).send()
             await cl.Message(content=str(first_question)).send()
         else:
             return_message = first_question
