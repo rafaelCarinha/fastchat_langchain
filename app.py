@@ -55,6 +55,8 @@ def validate_ai_response(ai_response):
 
     if ai_response.__contains__("is not a valid zip code"):
         return False
+    else:
+        return True
 
 
 @cl.langchain_postprocess
