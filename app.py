@@ -48,7 +48,11 @@ async def main():
     Hello, I am an AI insurance bot that will help you save money on your auto
     insurance. Let's start. What is your zip code?
     """
-    await cl.AskUserMessage(content=greeting, timeout=10).send()
+    res = await cl.AskUserMessage(content=greeting, timeout=10).send()
+    if res:
+        await cl.Message(
+            content=f"Your name is: {res['content']}",
+        ).send()
 
 
 def validate_ai_response(ai_response):
