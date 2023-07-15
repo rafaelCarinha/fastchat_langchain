@@ -42,6 +42,14 @@ def main():
     return chain
 
 
+@cl.on_chat_start
+async def main():
+    res = await cl.AskUserMessage(content="What is your zip code?", timeout=10).send()
+    if res:
+        await cl.Message(
+            content=f"Your zip code is: {res['content']}",
+        ).send()
+
 @cl.langchain_postprocess
 async def postprocess(output: str):
     global is_first_question_asked
