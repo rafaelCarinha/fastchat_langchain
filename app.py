@@ -8,18 +8,16 @@ import requests
 from langchain import PromptTemplate, LLMChain
 
 from langchain.chat_models import ChatOpenAI
-from langchain.document_loaders import TextLoader
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.indexes import VectorstoreIndexCreator
-
-#embedding = OpenAIEmbeddings(model="text-embedding-ada-002")
-#loader = TextLoader("state_of_the_union.txt")
-#index = VectorstoreIndexCreator(embedding=embedding).from_loaders([loader])
 llm = ChatOpenAI(model="gpt-3.5-turbo")
 
 load_dotenv()
 
-prompt_template = "{input}?"
+prompt_template = """
+name: Assistant
+greeting: Hello, I am an AI insurance bot that will help you save money on your auto
+  insurance. Let's start. What is your zip code?
+{input}?
+"""
 
 is_first_question_asked = False
 is_second_question_asked = False
