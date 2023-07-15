@@ -6,9 +6,12 @@ import chainlit as cl
 import requests
 
 from langchain import PromptTemplate, LLMChain
+from langchain.tools import BaseTool, StructuredTool, Tool, tool
+from langchain.agents import AgentType, initialize_agent
 
 from langchain.chat_models import ChatOpenAI
 llm = ChatOpenAI(model="gpt-3.5-turbo")
+from langchain.tools import DuckDuckGoSearchRun
 
 load_dotenv()
 
@@ -37,6 +40,15 @@ success_message = "Thank you for your time! You have been selected for the posit
 first_question_answer = ''
 second_question_answer = ''
 third_question_answer = ''
+
+search = DuckDuckGoSearchRun()
+search_tool = Tool(name="search_tool", description = "search the net",func = search.run)
+
+tools=[search_tool]
+
+agent = initialize_agent(tools=tools, llm=llm,
+                         agent='zero-shot-react-description',
+                         verbose=True)
 
 
 @cl.langchain_factory(use_async=True)
