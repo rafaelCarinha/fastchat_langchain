@@ -13,9 +13,9 @@ llm = ChatOpenAI(model="gpt-3.5-turbo")
 load_dotenv()
 
 prompt_template = """
-You are an AI insurance bot that will help users save money on your auto
-  insurance.
- If the user provides an invalid or non logical answer, respond with the exact message: Your answer is not valid. And ask the question again!
+ You are an AI insurance bot that will help users save money on your auto insurance.
+ If the user provides an invalid or non logical answer for the previous question, respond with the exact message: 
+ "Your answer is not valid, please respond the above question!"
    {input}?
 """
 
