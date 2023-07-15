@@ -117,9 +117,9 @@ async def postprocess(output: str):
                 reset_global_variabes()
                 await cl.Message(content=decline_message).send()
             else:
-                return_message = third_question
+                return_message = success_message
                 is_third_question_asked = True
-                await cl.Message(content=return_message).send()
+                await cl.Message(content=success_message).send()
     # elif is_third_question_asked:
     #     third_question_answer = user_input
     #     reset_global_variabes()
