@@ -53,7 +53,11 @@ def main():
 
 @cl.on_chat_start
 async def main():
-    await cl.AskUserMessage(content="Hello, I am an AI insurance bot that will help you save money on your auto insurance. Let's start. What is your zip code?", timeout=10).send()
+    res = await cl.AskUserMessage(content="Hello, I am an AI insurance bot that will help you save money on your auto insurance. Let's start. What is your zip code?", timeout=10).send()
+    if res:
+        await cl.Message(
+            content=f"Your zip code is: {res['content']}. Let's continue...",
+        ).send()
 
 
 @cl.langchain_postprocess
