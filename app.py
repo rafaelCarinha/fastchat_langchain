@@ -61,7 +61,7 @@ def main():
 async def main():
     greeting = """
     Hello, I am an AI insurance bot that will help you save money on your auto insurance. 
-    Let's start. What is your zip code?
+    Let's start. What is your name?
     """
     await cl.Message(content=greeting).send()
 
