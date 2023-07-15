@@ -55,7 +55,8 @@ def main():
 async def main():
     res = await cl.AskUserMessage(content="Hello, I am an AI insurance bot that will help you save money on your auto insurance. Let's start. What is your zip code?", timeout=10).send()
     if res:
-        await postprocess
+        await cl.langchain_postprocess
+
 
 @cl.langchain_postprocess
 async def postprocess(output: str):
