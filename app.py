@@ -6,8 +6,8 @@ import chainlit as cl
 import requests
 
 from langchain import PromptTemplate, LLMChain
-from langchain.tools import BaseTool, StructuredTool, Tool, tool
-from langchain.agents import AgentType, initialize_agent
+from langchain.tools import Tool
+from langchain.agents import initialize_agent
 
 from langchain.chat_models import ChatOpenAI
 llm = ChatOpenAI(model="gpt-3.5-turbo")
