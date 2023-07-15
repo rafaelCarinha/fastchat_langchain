@@ -108,7 +108,7 @@ async def postprocess(output: str):
             await cl.Message(content=str(third_question)).send()
         else:
             second_question_answer = user_input
-            if not chech_fountain_header({"zip_code":  f"{first_question_answer}", "work_tech":  f"{user_input}"}):
+            if not chech_fountain_header({"zip_code":  f"{first_question_answer}", "name":  f"{user_input}"}):
                 reset_global_variabes()
                 await cl.Message(content=decline_message).send()
             else:
@@ -118,7 +118,7 @@ async def postprocess(output: str):
     elif is_third_question_asked:
         third_question_answer = user_input
         reset_global_variabes()
-        if not chech_fountain_header({"zip_code":  f"{first_question_answer}", "work_tech":  f"{second_question_answer}", "company":  f"{third_question_answer}"}):
+        if not chech_fountain_header({"zip_code":  f"{first_question_answer}", "name":  f"{second_question_answer}", "current_insurance_company":  f"{third_question_answer}"}):
             await cl.Message(content=decline_message).send()
         else:
             await cl.Message(content=success_message).send()
