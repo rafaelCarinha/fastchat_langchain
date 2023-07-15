@@ -122,7 +122,7 @@ async def postprocess(output: str):
 
 def validate_ai_response(ai_response):
 
-    if ai_response.__contains__("answer is not valid"):
+    if ai_response.__contains__("answer is not valid") or ai_response.__contains__("Invalid"):
         return False
     else:
         return True
