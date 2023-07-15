@@ -21,8 +21,8 @@ is_third_question_asked = False
 
 is_match_response_from_endpoint = False
 
-first_question = "What's your name?"
-second_question = "What is your zip code?"
+first_question = "What's your zip code?"
+second_question = "What is your name?"
 third_question = "What is your current car insurance company?"
 decline_message = "Thank you for your time! You're not suitable for the position"
 success_message = "Thank you for your time! You have been selected for the position"
