@@ -7,15 +7,32 @@ import requests
 
 from langchain import PromptTemplate, LLMChain, OpenAI
 
+from langchain.llms import LlamaCpp
 from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import TextLoader
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.indexes import VectorstoreIndexCreator
 
+from langchain.callbacks.manager import CallbackManager
+from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
+
 embedding = OpenAIEmbeddings(model="text-embedding-ada-002")
 loader = TextLoader("state_of_the_union.txt")
 index = VectorstoreIndexCreator(embedding=embedding).from_loaders([loader])
-llm = ChatOpenAI(model="gpt-3.5-turbo")
+#llm = ChatOpenAI(model="gpt-3.5-turbo")
+
+n_gpu_layers = 40  # Change this value based on your model and your GPU VRAM pool.
+n_batch = 512  # Should be between 1 and n_ctx, consider the amount of VRAM in your GPU.
+
+callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
+
+llm = LlamaCpp(
+    model_path="/home/rafaelmarins/.cache/huggingface/hub/models--lmsys--vicuna-7b-v1.3/snapshots/30a07c35c99b04617243200163e77e6c569f7e5d/pytorch_model-00001-of-00002.bin",
+    n_gpu_layers=n_gpu_layers,
+    n_batch=n_batch,
+    callback_manager=callback_manager,
+    verbose=True,
+)
 #
 # questions = [
 #     "What is your LLM model",
