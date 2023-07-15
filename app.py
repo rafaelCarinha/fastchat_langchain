@@ -48,19 +48,7 @@ async def main():
     Hello, I am an AI insurance bot that will help you save money on your auto
     insurance. Let's start. What is your zip code?
     """
-    res = await cl.AskUserMessage(content=greeting, timeout=10).send()
-    if res:
-        await cl.Message(
-            content=f"Your name is: {res['content']}",
-        ).send()
-
-
-def validate_ai_response(ai_response):
-
-    if ai_response.__contains__("is not a valid zip code"):
-        return False
-    else:
-        return True
+    await cl.AskUserMessage(content=greeting, timeout=10).send()
 
 
 @cl.langchain_postprocess
@@ -109,6 +97,14 @@ async def postprocess(output: str):
             await cl.Message(content=decline_message).send()
         else:
             await cl.Message(content=success_message).send()
+
+
+def validate_ai_response(ai_response):
+
+    if ai_response.__contains__("is not a valid zip code"):
+        return False
+    else:
+        return True
 
 
 def chech_fountain_header(body):
