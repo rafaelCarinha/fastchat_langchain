@@ -77,7 +77,7 @@ async def postprocess(output: str):
         is_first_question_asked = True
         await cl.Message(content=ai_response).send()
 
-    if not is_second_question_asked:
+    elif not is_second_question_asked:
         first_question_answer = user_input
         if not chech_fountain_header({"zip_code":  f"{user_input}"}):
             reset_global_variabes()
