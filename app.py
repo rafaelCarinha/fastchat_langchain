@@ -16,6 +16,7 @@ prompt_template = """
 name: Assistant
 greeting: Hello, I am an AI insurance bot that will help you save money on your auto
   insurance. Let's start?
+It any answer is unsure, return starting with ERROR in the message
 {input}?
 """
 
