@@ -15,7 +15,7 @@ from langchain.tools import DuckDuckGoSearchRun
 
 load_dotenv()
 
-is_first_question_asked = False
+is_first_question_asked = True
 is_second_question_asked = False
 is_third_question_asked = False
 
@@ -91,12 +91,12 @@ async def postprocess(output: str):
 
     is_ai_response_valid = validate_ai_response(ai_response)
 
-    if not is_first_question_asked:
+    if is_first_question_asked:
         if not is_ai_response_valid:
             await cl.Message(content=str(ai_response)).send()
             await cl.Message(content=str(first_question)).send()
         else:
-            is_first_question_asked = True
+            is_second_question_asked = True
             await cl.Message(content=str(second_question)).send()
     elif not is_second_question_asked:
         if not validate_ai_response(ai_response):
