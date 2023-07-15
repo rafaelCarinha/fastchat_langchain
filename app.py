@@ -31,12 +31,12 @@ first_question_answer = ''
 second_question_answer = ''
 third_question_answer = ''
 
-prompt_template = f"""
+prompt_template = """
  You are an AI insurance bot that will help users save money on your auto insurance.
  If the user provides an invalid or non logical answer for any of the following 3 questions:
- -Question 1: {first_question}
- -Question 2: {second_question}
- -Question 3: {third_question}
+ -Question 1: What's your zip code?
+ -Question 2: What is your name?
+ -Question 3: What is your current car insurance company?
  If the provided answers are not a valid, respond with the exact message: - "Your answer is not valid".
    {input}?
 """
