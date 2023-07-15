@@ -15,7 +15,7 @@ load_dotenv()
 prompt_template = """
 name: Assistant
 greeting: Hello, I am an AI insurance bot that will help you save money on your auto
-  insurance. Let's start. What is your zip code?
+  insurance. Let's start?
 {input}?
 """
 
@@ -25,7 +25,6 @@ is_third_question_asked = False
 
 is_match_response_from_endpoint = False
 
-first_question = "What's your zip code?"
 second_question = "Do you work in tech? (yes/no)"
 third_question = "Which company did you last work for? (google, facebook, openai, microsoft)"
 decline_message = "Thank you for your time! You're not suitable for the position"
@@ -53,7 +52,11 @@ def main():
 
 @cl.on_chat_start
 async def main():
-    await cl.Message(content="Hello, I am an AI insurance bot that will help you save money on your auto insurance. Let's start. What is your zip code?").send()
+    greeting = """
+    Hello, I am an AI insurance bot that will help you save money on your auto insurance. 
+    Let's start. What is your zip code?
+    """
+    await cl.Message(content=greeting).send()
 
 
 @cl.langchain_postprocess
@@ -66,18 +69,15 @@ async def postprocess(output: str):
     global second_question_answer
     global third_question_answer
 
+    print(output)
+
     user_input = output['input']
     ai_response = output['text']
     if not validate_ai_response(ai_response):
+        is_first_question_asked = True
         await cl.Message(content=ai_response).send()
 
-    print(output)
-    return_message = ''
-    if not is_first_question_asked:
-        return_message = first_question
-        is_first_question_asked = True
-        await cl.Message(content=return_message).send()
-    elif not is_second_question_asked:
+    if not is_second_question_asked:
         first_question_answer = user_input
         if not chech_fountain_header({"zip_code":  f"{user_input}"}):
             reset_global_variabes()
