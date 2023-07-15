@@ -18,8 +18,7 @@ prompt_template = """
  -Question 1: What's your zip code? - Valid Answers: Any valid ZIP United States Zip Code.
  -Question 2: Do you work in tech? - Valid Answers: yes or no.
  -Question 3: Which company did you last work for? - Valid Answers: Any Technology Company.
- If the provided answers are not a valid, or if the user just salutes, 
- respond that the answer is not valid and ask the same question again.
+ If the provided answers are not a valid, respond with the exact message: - "Your answer is not valid".
    {input}?
 """
 
@@ -82,13 +81,15 @@ async def postprocess(output: str):
     if is_first_question_asked:
         if not validate_ai_response(ai_response):
             await cl.Message(content=str(ai_response + first_question)).send()
+            await cl.Message(content=str(first_question)).send()
         else:
             return_message = first_question
             is_first_question_asked = True
             await cl.Message(content=return_message).send()
     elif not is_second_question_asked:
         if not validate_ai_response(ai_response):
-            await cl.Message(content=str(ai_response + second_question)).send()
+            await cl.Message(content=str(ai_response)).send()
+            await cl.Message(content=str(second_question)).send()
         else:
             first_question_answer = user_input
             if not chech_fountain_header({"zip_code":  f"{user_input}"}):
@@ -100,7 +101,8 @@ async def postprocess(output: str):
                 await cl.Message(content=return_message).send()
     elif not is_third_question_asked:
         if not validate_ai_response(ai_response):
-            await cl.Message(content=str(ai_response + third_question)).send()
+            await cl.Message(content=str(ai_response)).send()
+            await cl.Message(content=str(third_question)).send()
         else:
             second_question_answer = user_input
             if not chech_fountain_header({"zip_code":  f"{first_question_answer}", "work_tech":  f"{user_input}"}):
