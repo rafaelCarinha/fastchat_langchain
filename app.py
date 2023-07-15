@@ -71,7 +71,6 @@ async def postprocess(output: str):
     ai_response = output['text']
     if validate_ai_response(ai_response):
         await cl.Message(content=ai_response).send()
-        return
 
     print(output)
     return_message = ''
