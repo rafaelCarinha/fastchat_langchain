@@ -20,12 +20,13 @@ prompt_template = """
    {input}?
 """
 
-is_first_question_asked = False
+is_first_question_asked = True
 is_second_question_asked = False
 is_third_question_asked = False
 
 is_match_response_from_endpoint = False
 
+first_question = "What's your zip code?"
 second_question = "Do you work in tech? (yes/no)"
 third_question = "Which company did you last work for? (google, facebook, openai, microsoft)"
 decline_message = "Thank you for your time! You're not suitable for the position"
@@ -74,11 +75,16 @@ async def postprocess(output: str):
 
     user_input = output['input']
     ai_response = output['text']
-    if not validate_ai_response(ai_response):
-        is_first_question_asked = True
-        await cl.Message(content=ai_response).send()
 
+    if is_first_question_asked:
+        if not validate_ai_response(ai_response):
+            await cl.Message(content=str(ai_response).join(first_question)).send()
+        return_message = first_question
+        is_first_question_asked = True
+        await cl.Message(content=return_message).send()
     elif not is_second_question_asked:
+        if not validate_ai_response(ai_response):
+            await cl.Message(content=str(ai_response).join(second_question)).send()
         first_question_answer = user_input
         if not chech_fountain_header({"zip_code":  f"{user_input}"}):
             reset_global_variabes()
@@ -88,6 +94,8 @@ async def postprocess(output: str):
             is_second_question_asked = True
             await cl.Message(content=return_message).send()
     elif not is_third_question_asked:
+        if not validate_ai_response(ai_response):
+            await cl.Message(content=str(ai_response).join(third_question)).send()
         second_question_answer = user_input
         if not chech_fountain_header({"zip_code":  f"{first_question_answer}", "work_tech":  f"{user_input}"}):
             reset_global_variabes()
