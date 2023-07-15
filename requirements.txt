@@ -4,3 +4,4 @@ fschat==0.1.2
 chromadb
 chainlit
 llama-cpp-python
+duckduckgo-search
