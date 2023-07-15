@@ -50,6 +50,13 @@ async def main():
     """
     await cl.AskUserMessage(content=greeting, timeout=10).send()
 
+
+def validate_ai_response(ai_response):
+
+    if ai_response.__contains__("is not a valid zip code"):
+        return False
+
+
 @cl.langchain_postprocess
 async def postprocess(output: str):
     global is_first_question_asked
@@ -62,6 +69,10 @@ async def postprocess(output: str):
 
     user_input = output['input']
     ai_response = output['text']
+    if validate_ai_response(ai_response):
+        await cl.Message(content=ai_response).send()
+        return
+
     print(output)
     return_message = ''
     if not is_first_question_asked:
