@@ -13,10 +13,9 @@ llm = ChatOpenAI(model="gpt-3.5-turbo")
 load_dotenv()
 
 prompt_template = """
-name: Assistant
-greeting: Hello, I am an AI insurance bot that will help you save money on your auto
-  insurance. Let's start?
-It any answer is unsure, return starting with ERROR in the message
+You are an AI insurance bot that will help users save money on your auto
+  insurance.
+It any of your answers require more information, return starting with ERROR in the message
 {input}?
 """
 
