@@ -24,8 +24,8 @@ is_match_response_from_endpoint = False
 first_question = "What's your zip code?"
 second_question = "What is your current car insurance company?"
 third_question = "What is your name?"
-decline_message = "Thank you for your time! You're not suitable for the position"
-success_message = "Thank you for your time! You have been selected for the position"
+decline_message = "Thank you for your time! You're not suitable for the insurance quote!"
+success_message = "Thank you for your time. We will email you with a insurance quote!"
 
 first_question_answer = ''
 second_question_answer = ''
@@ -79,8 +79,6 @@ async def postprocess(output: str):
     user_input = output['input']
     ai_response = output['text']
 
-    is_ai_response_valid = validate_ai_response(ai_response)
-
     if not is_first_question_asked:
         if not validate_ai_response(ai_response):
             await cl.Message(content=str(ai_response)).send()
@@ -117,16 +115,8 @@ async def postprocess(output: str):
                 reset_global_variabes()
                 await cl.Message(content=decline_message).send()
             else:
-                return_message = success_message
                 is_third_question_asked = True
                 await cl.Message(content=success_message).send()
-    # elif is_third_question_asked:
-    #     third_question_answer = user_input
-    #     reset_global_variabes()
-    #     if not chech_fountain_header({"zip_code":  f"{first_question_answer}", "name":  f"{second_question_answer}", "current_insurance_company":  f"{third_question_answer}"}):
-    #         await cl.Message(content=decline_message).send()
-    #     else:
-    #         await cl.Message(content=success_message).send()
 
 
 def validate_ai_response(ai_response):
