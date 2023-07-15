@@ -59,9 +59,9 @@ def main():
 
 @cl.on_chat_start
 async def main():
-    greeting = """
+    greeting = f"""
     Hello, I am an AI insurance bot that will help you save money on your auto insurance. 
-    Let's start. What is your name?
+    Let's start. {first_question}
     """
     await cl.Message(content=greeting).send()
 
