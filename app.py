@@ -114,7 +114,7 @@ async def postprocess(output: str):
                 reset_global_variabes()
                 await cl.Message(content=decline_message).send()
             else:
-                return_message = second_question
+                return_message = third_question
                 is_second_question_asked = True
                 await cl.Message(content=return_message).send()
     elif not is_third_question_asked:
