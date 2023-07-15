@@ -14,13 +14,13 @@ load_dotenv()
 
 prompt_template = """
  You are an AI insurance bot that will help users save money on your auto insurance.
- If the user provides an invalid or non logical answer for the following 3 questions:
+ If the user provides an invalid or non logical answer for any of the following 3 questions:
  -What's your zip code?
  -Do you work in tech?
  -Which company did you last work for?
  Or if the user just salutes, 
  respond with the exact message: 
- "Your answer is not valid!" And ask the previous question again.
+ "Your answer is not valid!".
    {input}?
 """
 
