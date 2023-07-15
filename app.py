@@ -18,7 +18,6 @@ prompt_template = """
  -What's your zip code?
  -Do you work in tech?
  -Which company did you last work for?
- or just answers with randon characters, 
  respond with the exact message: 
  "Your answer is not valid!"
    {input}?
