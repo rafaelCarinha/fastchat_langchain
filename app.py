@@ -21,8 +21,8 @@ is_third_question_asked = False
 
 is_match_response_from_endpoint = False
 
-first_question = "What's your zip code?"
-second_question = "What is your name?"
+first_question = "What's your name?"
+second_question = "What is your zip code?"
 third_question = "What is your current car insurance company?"
 decline_message = "Thank you for your time! You're not suitable for the position"
 success_message = "Thank you for your time! You have been selected for the position"
@@ -34,8 +34,8 @@ third_question_answer = ''
 prompt_template = """
  You are an AI insurance bot that will help users save money on your auto insurance.
  If the user provides an invalid or non logical answer for any of the following 3 questions:
- -Question 1: What's your zip code?
- -Question 2: What is your name?
+ -Question 1: What's your name?
+ -Question 2: What is your zip code?
  -Question 3: What is your current car insurance company?
  If the provided answers are not a valid, respond with the exact message: - "Your answer is not valid".
    {input}?
