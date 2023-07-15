@@ -37,6 +37,7 @@ You are an AI insurance bot that will help users save money on your auto
    name then the conversation is over. 
    You close it by saying that you will email
    them a quote and then you say goodbye
+   {input}?
 """
 
 is_first_question_asked = False
