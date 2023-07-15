@@ -22,24 +22,14 @@ is_third_question_asked = False
 is_match_response_from_endpoint = False
 
 first_question = "What's your zip code?"
-second_question = "What is your name?"
-third_question = "What is your current car insurance company?"
+second_question = "What is your current car insurance company?"
+third_question = "What is your name?"
 decline_message = "Thank you for your time! You're not suitable for the position"
 success_message = "Thank you for your time! You have been selected for the position"
 
 first_question_answer = ''
 second_question_answer = ''
 third_question_answer = ''
-
-# prompt_template = """
-#  You are an AI insurance bot that will help users save money on your auto insurance.
-#  If the user provides a non-logical answer for any of the following 3 questions,
-#  -Question 1: What's your name?
-#  -Question 2: What is your zip code?
-#  -Question 3: What is your current car insurance company?
-#  respond with the exact message: - "Your answer is not valid".
-#    {input}?
-# """
 
 prompt_template = """
  You are an AI insurance bot that will help users save money on your auto insurance.
@@ -110,7 +100,7 @@ async def postprocess(output: str):
             await cl.Message(content=str(second_question)).send()
         else:
             second_question_answer = user_input
-            if not chech_fountain_header({"zip_code":  f"{first_question_answer}", "name":  f"{user_input}"}):
+            if not chech_fountain_header({"zip_code":  f"{first_question_answer}", "current_insurance_company":  f"{user_input}"}):
                 reset_global_variabes()
                 await cl.Message(content=decline_message).send()
             else:
@@ -123,7 +113,7 @@ async def postprocess(output: str):
             await cl.Message(content=str(third_question)).send()
         else:
             third_question_answer = user_input
-            if not chech_fountain_header({"zip_code":  f"{first_question_answer}", "name":  f"{second_question_answer}", "current_insurance_company":  f"{third_question_answer}"}):
+            if not chech_fountain_header({"zip_code":  f"{first_question_answer}", "current_insurance_company":  f"{second_question_answer}", "name":  f"{third_question_answer}"}):
                 reset_global_variabes()
                 await cl.Message(content=decline_message).send()
             else:
