@@ -102,7 +102,7 @@ async def postprocess(output: str):
                 await cl.Message(content=decline_message).send()
             else:
                 return_message = second_question
-                is_second_question_asked = True
+                is_first_question_asked = True
                 await cl.Message(content=return_message).send()
     elif not is_second_question_asked:
         if not validate_ai_response(ai_response):
