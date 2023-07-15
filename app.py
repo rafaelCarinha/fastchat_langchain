@@ -16,7 +16,7 @@ prompt_template = """
  You are an AI insurance bot that will help users save money on your auto insurance.
  If the user provides an invalid or non logical answer for the previous question, or just randon characters, 
  respond with the exact message: 
- "Your answer is not valid, please respond the above question!"
+ "Your answer is not valid!"
    {input}?
 """
 
@@ -78,14 +78,14 @@ async def postprocess(output: str):
 
     if is_first_question_asked:
         if not validate_ai_response(ai_response):
-            await cl.Message(content=str(ai_response).join(first_question)).send()
+            await cl.Message(content=str(ai_response + first_question)).send()
         else:
             return_message = first_question
             is_first_question_asked = True
             await cl.Message(content=return_message).send()
     elif not is_second_question_asked:
         if not validate_ai_response(ai_response):
-            await cl.Message(content=str(ai_response).join(second_question)).send()
+            await cl.Message(content=str(ai_response + second_question)).send()
         else:
             first_question_answer = user_input
             if not chech_fountain_header({"zip_code":  f"{user_input}"}):
@@ -97,7 +97,7 @@ async def postprocess(output: str):
                 await cl.Message(content=return_message).send()
     elif not is_third_question_asked:
         if not validate_ai_response(ai_response):
-            await cl.Message(content=str(ai_response).join(third_question)).send()
+            await cl.Message(content=str(ai_response + third_question)).send()
         else:
             second_question_answer = user_input
             if not chech_fountain_header({"zip_code":  f"{first_question_answer}", "work_tech":  f"{user_input}"}):
