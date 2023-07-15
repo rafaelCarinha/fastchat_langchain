@@ -15,16 +15,6 @@ from langchain.tools import DuckDuckGoSearchRun
 
 load_dotenv()
 
-prompt_template = """
- You are an AI insurance bot that will help users save money on your auto insurance.
- If the user provides an invalid or non logical answer for any of the following 3 questions:
- -Question 1: What's your zip code? - Valid Answers: 11030570, 61101.
- -Question 2: Do you work in tech? - Valid Answers: yes or no.
- -Question 3: Which company did you last work for? - Valid Answers: Any Technology Company.
- If the provided answers are not a valid, respond with the exact message: - "Your answer is not valid".
-   {input}?
-"""
-
 is_first_question_asked = True
 is_second_question_asked = False
 is_third_question_asked = False
@@ -32,14 +22,24 @@ is_third_question_asked = False
 is_match_response_from_endpoint = False
 
 first_question = "What's your zip code?"
-second_question = "Do you work in tech? (yes/no)"
-third_question = "Which company did you last work for? (google, facebook, openai, microsoft)"
+second_question = "What is your name?"
+third_question = "What is your current car insurance company?"
 decline_message = "Thank you for your time! You're not suitable for the position"
 success_message = "Thank you for your time! You have been selected for the position"
 
 first_question_answer = ''
 second_question_answer = ''
 third_question_answer = ''
+
+prompt_template = f"""
+ You are an AI insurance bot that will help users save money on your auto insurance.
+ If the user provides an invalid or non logical answer for any of the following 3 questions:
+ -Question 1: {first_question}
+ -Question 2: {second_question}
+ -Question 3: {third_question}
+ If the provided answers are not a valid, respond with the exact message: - "Your answer is not valid".
+   {input}?
+"""
 
 search = DuckDuckGoSearchRun()
 search_tool = Tool(name="search_tool", description = "search the net",func = search.run)
@@ -55,15 +55,6 @@ agent = initialize_agent(tools=tools, llm=llm,
 def main():
     chain = LLMChain(llm=llm, prompt=PromptTemplate.from_template(prompt_template))
     return chain
-
-
-# @cl.on_chat_start
-# async def main():
-#     greeting = """
-#     Hello, I am an AI insurance bot that will help you save money on your auto
-#     insurance. Let's start. What is your zip code?
-#     """
-#     await cl.AskUserMessage(content=greeting, timeout=10).send()
 
 
 @cl.on_chat_start
