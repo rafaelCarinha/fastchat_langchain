@@ -18,8 +18,9 @@ prompt_template = """
  -What's your zip code?
  -Do you work in tech?
  -Which company did you last work for?
+ Or if the user just salutes, 
  respond with the exact message: 
- "Your answer is not valid!"
+ "Your answer is not valid!" And ask the previous question again.
    {input}?
 """
 
