@@ -52,7 +52,7 @@ def main():
 
 
 @cl.on_chat_start
-def main():
+async def main():
     await cl.AskUserMessage(content="Hello, I am an AI insurance bot that will help you save money on your auto insurance. Let's start. What is your zip code?", timeout=10).send()
 
 
@@ -104,12 +104,12 @@ async def postprocess(output: str):
             await cl.Message(content=success_message).send()
 
 
-def validate_ai_response(ai_response):
-
-    if ai_response.__contains__("is not a valid zip code"):
-        return False
-    else:
-        return True
+# def validate_ai_response(ai_response):
+#
+#     if ai_response.__contains__("is not a valid zip code"):
+#         return False
+#     else:
+#         return True
 
 
 def chech_fountain_header(body):
