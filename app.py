@@ -97,6 +97,7 @@ async def postprocess(output: str):
             await cl.Message(content=str(first_question)).send()
         else:
             is_first_question_asked = True
+            await cl.Message(content=str(first_question)).send()
     elif not is_second_question_asked:
         if not validate_ai_response(ai_response):
             await cl.Message(content=str(ai_response)).send()
