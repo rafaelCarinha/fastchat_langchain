@@ -80,7 +80,9 @@ async def postprocess(output: str):
     ai_response = output['text']
 
     if not is_first_question_asked:
-        if not validate_ai_response(ai_response):
+        if len(user_input) is not 5:
+            ai_response = 'The provided answer is not a valid US ZIP CODE!'
+        #if not validate_ai_response(ai_response):
             await cl.Message(content=str(ai_response)).send()
             await cl.Message(content=str(first_question)).send()
         else:
