@@ -33,8 +33,10 @@ third_question_answer = ''
 
 prompt_template = """
  You are an AI insurance bot that will help users save money on your auto insurance.
- If the user provides a non-logical answer, or a zip code that does not have 5 digits,
+ If the user provides a non-logical answer,
  respond with the exact message: - "Your answer is not valid".
+ If the user provides a zip code that does not have 5 digits,
+ respond with the exact message: - "Your zip code is not valid". 
  Otherwise, continue the conversation.
    {input}?
 """
