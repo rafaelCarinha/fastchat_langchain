@@ -8,6 +8,7 @@ import requests
 from langchain import PromptTemplate, LLMChain
 
 from langchain.chat_models import ChatOpenAI
+
 llm = ChatOpenAI(model="gpt-3.5-turbo")
 
 load_dotenv()
@@ -76,80 +77,86 @@ async def main():
 
 @cl.langchain_postprocess
 async def postprocess(output: str):
-
     print(output)
 
     user_input = output['input']
     ai_response = output['text']
 
     if len(questions_answer_dict[1]) == 0:
+        api_json_body = {f"{questions_attribute_dict[1]}": f"{user_input}"}
         await validate_ai_response_and_check_api(ai_response,
                                                  user_input,
                                                  1,
-                                                 {f"{questions_attribute_dict[1]}": f"{user_input}"},
+                                                 api_json_body,
                                                  False
                                                  )
     elif len(questions_answer_dict[2]) == 0:
+        api_json_body = {f"{questions_attribute_dict[1]}": f"{questions_answer_dict[1]}",
+                         f"{questions_attribute_dict[2]}": f"{user_input}"}
         await validate_ai_response_and_check_api(ai_response,
                                                  user_input,
                                                  2,
-                                                 {f"{questions_attribute_dict[1]}": f"{questions_answer_dict[1]}",
-                                                  f"{questions_attribute_dict[2]}": f"{user_input}"},
+                                                 api_json_body,
                                                  False
                                                  )
     elif len(questions_answer_dict[3]) == 0:
+        api_json_body = {f"{questions_attribute_dict[1]}": f"{questions_answer_dict[1]}",
+                         f"{questions_attribute_dict[2]}": f"{questions_answer_dict[2]}",
+                         f"{questions_attribute_dict[3]}": f"{user_input}"}
         await validate_ai_response_and_check_api(ai_response,
                                                  user_input,
                                                  3,
-                                                 {f"{questions_attribute_dict[1]}": f"{questions_answer_dict[1]}",
-                                                  f"{questions_attribute_dict[2]}": f"{questions_answer_dict[2]}",
-                                                  f"{questions_attribute_dict[3]}": f"{user_input}"},
+                                                 api_json_body,
                                                  False
                                                  )
     elif len(questions_answer_dict[4]) == 0:
+        api_json_body = {f"{questions_attribute_dict[1]}": f"{questions_answer_dict[1]}",
+                         f"{questions_attribute_dict[2]}": f"{questions_answer_dict[2]}",
+                         f"{questions_attribute_dict[3]}": f"{questions_answer_dict[3]}",
+                         f"{questions_attribute_dict[4]}": f"{user_input}"}
         await validate_ai_response_and_check_api(ai_response,
                                                  user_input,
                                                  4,
-                                                 {f"{questions_attribute_dict[1]}": f"{questions_answer_dict[1]}",
-                                                  f"{questions_attribute_dict[2]}": f"{questions_answer_dict[2]}",
-                                                  f"{questions_attribute_dict[3]}": f"{questions_answer_dict[3]}",
-                                                  f"{questions_attribute_dict[4]}": f"{user_input}"},
+                                                 api_json_body,
                                                  False
                                                  )
     elif len(questions_answer_dict[5]) == 0:
+        api_json_body = {f"{questions_attribute_dict[1]}": f"{questions_answer_dict[1]}",
+                         f"{questions_attribute_dict[2]}": f"{questions_answer_dict[2]}",
+                         f"{questions_attribute_dict[3]}": f"{questions_answer_dict[3]}",
+                         f"{questions_attribute_dict[4]}": f"{questions_answer_dict[4]}",
+                         f"{questions_attribute_dict[5]}": f"{user_input}"}
         await validate_ai_response_and_check_api(ai_response,
                                                  user_input,
                                                  5,
-                                                 {f"{questions_attribute_dict[1]}": f"{questions_answer_dict[1]}",
-                                                  f"{questions_attribute_dict[2]}": f"{questions_answer_dict[2]}",
-                                                  f"{questions_attribute_dict[3]}": f"{questions_answer_dict[3]}",
-                                                  f"{questions_attribute_dict[4]}": f"{questions_answer_dict[4]}",
-                                                  f"{questions_attribute_dict[5]}": f"{user_input}"},
+                                                 api_json_body,
                                                  False
                                                  )
     elif len(questions_answer_dict[6]) == 0:
+        api_json_body = {f"{questions_attribute_dict[1]}": f"{questions_answer_dict[1]}",
+                         f"{questions_attribute_dict[2]}": f"{questions_answer_dict[2]}",
+                         f"{questions_attribute_dict[3]}": f"{questions_answer_dict[3]}",
+                         f"{questions_attribute_dict[4]}": f"{questions_answer_dict[4]}",
+                         f"{questions_attribute_dict[5]}": f"{questions_answer_dict[5]}",
+                         f"{questions_attribute_dict[6]}": f"{user_input}"}
         await validate_ai_response_and_check_api(ai_response,
                                                  user_input,
                                                  6,
-                                                 {f"{questions_attribute_dict[1]}": f"{questions_answer_dict[1]}",
-                                                  f"{questions_attribute_dict[2]}": f"{questions_answer_dict[2]}",
-                                                  f"{questions_attribute_dict[3]}": f"{questions_answer_dict[3]}",
-                                                  f"{questions_attribute_dict[4]}": f"{questions_answer_dict[4]}",
-                                                  f"{questions_attribute_dict[5]}": f"{questions_answer_dict[5]}",
-                                                  f"{questions_attribute_dict[6]}": f"{user_input}"},
+                                                 api_json_body,
                                                  False
                                                  )
     elif len(questions_answer_dict[7]) == 0:
+        api_json_body = {f"{questions_attribute_dict[1]}": f"{questions_answer_dict[1]}",
+                         f"{questions_attribute_dict[2]}": f"{questions_answer_dict[2]}",
+                         f"{questions_attribute_dict[3]}": f"{questions_answer_dict[3]}",
+                         f"{questions_attribute_dict[4]}": f"{questions_answer_dict[4]}",
+                         f"{questions_attribute_dict[5]}": f"{questions_answer_dict[5]}",
+                         f"{questions_attribute_dict[6]}": f"{questions_answer_dict[6]}",
+                         f"{questions_attribute_dict[7]}": f"{user_input}"}
         await validate_ai_response_and_check_api(ai_response,
                                                  user_input,
                                                  7,
-                                                 {f"{questions_attribute_dict[1]}": f"{questions_answer_dict[1]}",
-                                                  f"{questions_attribute_dict[2]}": f"{questions_answer_dict[2]}",
-                                                  f"{questions_attribute_dict[3]}": f"{questions_answer_dict[3]}",
-                                                  f"{questions_attribute_dict[4]}": f"{questions_answer_dict[4]}",
-                                                  f"{questions_attribute_dict[5]}": f"{questions_answer_dict[5]}",
-                                                  f"{questions_attribute_dict[6]}": f"{questions_answer_dict[6]}",
-                                                  f"{questions_attribute_dict[7]}": f"{user_input}"},
+                                                 api_json_body,
                                                  True)
 
 
@@ -165,14 +172,13 @@ async def validate_ai_response_and_check_api(ai_response, user_input, question_i
             await cl.Message(content=decline_message).send()
         else:
             if not last_message:
-                return_message = questions_dict[question_index+1]
+                return_message = questions_dict[question_index + 1]
                 await cl.Message(content=return_message).send()
             else:
                 await cl.Message(content=success_message).send()
 
 
 def validate_ai_response(ai_response):
-
     if ai_response.__contains__("answer is not valid") or ai_response.__contains__("Invalid"):
         return False
     else:
@@ -200,4 +206,3 @@ def reset_global_variabes():
     is_first_question_asked = False
     is_second_question_asked = False
     is_third_question_asked = False
-
